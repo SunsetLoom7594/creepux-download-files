@@ -8,9 +8,19 @@ echo "Welcome to Creepux OS | Version $VERSION | For Linux"
 echo "==================="
 read -p "Awaiting input   " option
 
-if [[ "$option" == "help" ]]; then
-  echo "Recieved: help"
-elif [[ "$option" == "exit" ]] then
-  echo "Recieved: exit"
-  read -p "Press Enter to exit"
-fi
+while true; do
+    read -p "Awaiting input: " option
+
+    if [[ "$option" == "help" ]]; then
+        echo "Available commands:"
+        echo "  help  - show this message"
+        echo "  exit  - quit installer"
+
+    elif [[ "$option" == "exit" ]]; then
+        echo "Exiting installer."
+        break
+
+    else
+        echo "Unknown command: $option"
+    fi
+done
