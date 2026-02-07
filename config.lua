@@ -6,3 +6,5 @@ config = {
 		["Type"] = "Cerified-For_Linux",
     },
 }
+
+print(config["CreepuxOSInfo"].version)
