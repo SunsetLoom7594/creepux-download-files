@@ -10,7 +10,7 @@ read -p "Awaiting input" option
 
 if [[ "$option" == "help" ]]; then
   echo "Recieved: help"
-elif [[ "$option" == "exit" ]]
+elif [[ "$option" == "exit" ]] then
   echo "Recieved: exit"
   read -p "Press Enter to exit"
 fi
