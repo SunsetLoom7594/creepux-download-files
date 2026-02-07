@@ -1,10 +1,5 @@
--- written in lua
-
-config = {
-	["CreepuxOSInfo"] = {
-    	["Version"] = 1.0.0,
-		["Type"] = "Cerified-For_Linux",
-    },
+return {
+    name = "Creepux OS",
+    version = "1.0.011",
+    platform = "Linux"
 }
-
-print(config["CreepuxOSInfo"].version)
