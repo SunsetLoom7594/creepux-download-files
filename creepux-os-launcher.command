@@ -6,7 +6,7 @@ echo "Welcome to Creepux OS | Version $VERSION | For Linux"
 
 
 echo "==================="
-read -p "Awaiting input" option
+read -p "Awaiting input   " option
 
 if [[ "$option" == "help" ]]; then
   echo "Recieved: help"
