@@ -18,7 +18,7 @@ echo "Welcome to Creepux OS | Version $VERSION | For Linux"
 echo "==================="
 
 while true; do
-    read -p "Awaiting input: " option
+    read -p "users-local: " option
 
     if [[ "$option" == "help" ]]; then
         echo "Available commands:"
