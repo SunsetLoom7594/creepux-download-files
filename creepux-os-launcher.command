@@ -1,6 +1,9 @@
 #!/bin/bash
 
 VERSION=$(lua -e 'print(dofile("config.lua").version)')
+NAME=$(lua -e 'print(dofile("config.lua").name)')
+PLATFORM=$(lua -e 'print(dofile("config.lua").platform)')
+
 
 echo "Welcome to Creepux OS | Version $VERSION | For Linux"
 
@@ -19,7 +22,11 @@ while true; do
     elif [[ "$option" == "exit" ]]; then
         echo "Exiting installer."
         break
-
+    elif [[ "$option" == "info" ]]; then
+        echo "Current Creepux OS Info"
+        echo "  Version: $VERSION"
+        echo "  Name: $NAME"
+        echo "  Platform: $PLATFORM"
     else
         echo "Unknown command: $option"
     fi
