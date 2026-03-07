@@ -67,6 +67,15 @@ while true; do
                 rm -f "$TMP_CONFIG"
             fi
         fi
+    elif [[ "$option" == "run" ]]; then
+        read -p "Do you want to update config.lua? (Y/N): " run
+        if [["$run" == "help"]]; then
+            echo "Recieved: Help"
+            echo "Type name of application you want run"
+            echo "Current Applications:"
+            echo "Server-Mod-V1"
+        fi
+        break
 
     elif [[ "$option" == "exit" ]]; then
         echo "Exiting installer."
