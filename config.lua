@@ -1,5 +1,5 @@
 return {
     name = "Creepux OS - Server Edition",
-    version = "1.0.011",
+    version = "1.0.02",
     platform = "Linux"
 }
