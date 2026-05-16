@@ -84,6 +84,13 @@ while true; do
         echo "Exiting installer."
         break
 
+    elif [[ "$option" == "extras" ]]; then
+        echo "Would you like to install the Extras for this Program? (It is under 200mb)"
+        read -p "Install Extras? (Y/N): " extrasans
+        if [[ "$extrans == "Y" ]]; then
+            echo "Installing Extras..."
+        break
+
     else
         echo "Unknown command: $option"
         echo "Have you typed it correctly? Type help for help."
