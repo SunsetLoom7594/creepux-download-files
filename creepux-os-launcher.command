@@ -1,7 +1,8 @@
 #!/bin/bash
 
 CONFIG_URL="https://raw.githubusercontent.com/SunsetLoom7594/creepux-download-files/main/config.lua"
-TMP_CONFIG="onfig.lua"
+TMP_CONFIG="config.lua"
+
 
 # ---- Load local config ----
 if [[ ! -f config.lua ]]; then
@@ -89,6 +90,9 @@ while true; do
         read -p "Install Extras? (Y/N): " extrasans
         if [[ "$extrans == "Y" ]]; then
             echo "Installing Extras..."
+            FILE="config.lua"
+            sed -i 's/extrasinstalled = "false"/extrasinstalled = "true"/' "$FILE"
+            echo "extrasinstalled set to: TRUE"
         break
 
     else
