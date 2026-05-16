@@ -32,6 +32,9 @@ while true; do
         echo "  Name:     $NAME"
         echo "  Version:  $VERSION"
         echo "  Platform: $PLATFORM"
+        echo "  Credits: SunsetLoom7594"
+        echo "  and Creeper Studios"
+        echo "  Copyright Creeper Studios 2026"
 
     elif [[ "$option" == "update" ]]; then
         echo "Checking for updates..."
@@ -83,5 +86,6 @@ while true; do
 
     else
         echo "Unknown command: $option"
+        echo "Have you typed it correctly? Type help for help."
     fi
 done
