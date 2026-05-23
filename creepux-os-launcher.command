@@ -73,7 +73,7 @@ while true; do
         fi
     elif [[ "$option" == "run" ]]; then
         read -p "Do you want to update config.lua? (Y/N): " run
-        if [["$run" == "help"]]; then
+        if [[ "$run" == "help" ]]; then
             echo "Recieved: Help"
             echo "Type name of application you want run"
             echo "Current Applications:"
@@ -86,13 +86,20 @@ while true; do
         break
 
     elif [[ "$option" == "extras" ]]; then
-        echo "Would you like to install the Extras for this Program? (It is under 200mb)"
+        echo "Would you like to install the Extras for this Program? (It is under 500mb)"
         read -p "Install Extras? (Y/N): " extrasans
-        if [[ "$extrans == "Y" ]]; then
+        if [[ "$extrasans" == "Y" ]]; then
             echo "Installing Extras..."
             FILE="config.lua"
             sed -i 's/extrasinstalled = "false"/extrasinstalled = "true"/' "$FILE"
             echo "extrasinstalled set to: TRUE"
+            echo "Preparing to install extras..."
+            echo "Downloading extras pack version 1.0.0"
+            wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1
+            echo "Once installed, please exit the application, restart your machine, and reopen the application, the extras pack will be located in the same folder."
+        else
+            echo "Extras installation canceled."
+        fi
         break
 
     else
