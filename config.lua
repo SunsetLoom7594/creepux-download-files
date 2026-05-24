@@ -1,6 +1,7 @@
 return {
     name = "Creepux OS - Server Edition",
-    version = "1.0.02",
+    info = "NO-EDIT","BETA-VERSION",
+    version = "1.0.04",
     platform = "Linux",
     extrasinstalled = "false"
 }
