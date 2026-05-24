@@ -27,6 +27,7 @@ while true; do
         echo "  info    - display system info"
         echo "  update  - check for updates"
         echo "  exit    - quit installer"
+        echo "  extras  - install extras addon / view info about extras"
 
     elif [[ "$option" == "info" ]]; then
         echo "Current Creepux OS Info"
@@ -86,6 +87,7 @@ while true; do
         break
 
     elif [[ "$option" == "extras" ]]; then
+        if 
         echo "Would you like to install the Extras for this Program? (It is under 500mb)"
         read -p "Install Extras? (Y/N): " extrasans
         if [[ "$extrasans" == "Y" ]]; then
