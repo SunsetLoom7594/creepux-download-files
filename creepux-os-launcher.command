@@ -2,8 +2,29 @@
 
 CONFIG_URL="https://raw.githubusercontent.com/SunsetLoom7594/creepux-download-files/main/config.lua"
 TMP_CONFIG="config.lua"
-EXTRAS_ISTALLED=nil
+EXTRAS_INSTALLED=nil
 
+# ---- Check for Lua and install if missing ----
+if ! command -v lua &>/dev/null; then
+    echo "Lua is not installed. Attempting to install it..."
+    if command -v apt-get &>/dev/null; then
+        sudo apt-get update -y && sudo apt-get install -y lua5.4
+    elif command -v brew &>/dev/null; then
+        brew install lua
+    else
+        echo "Could not install Lua automatically. Please install it manually and re-run this script."
+        read -p "Press Enter to exit"
+        exit 1
+    fi
+
+    if ! command -v lua &>/dev/null; then
+        echo "Lua installation failed. Please install Lua manually."
+        read -p "Press Enter to exit"
+        exit 1
+    fi
+
+    echo "Lua installed successfully."
+fi
 
 # ---- Load local config ----
 if [[ ! -f config.lua ]]; then
@@ -73,44 +94,53 @@ while true; do
                 rm -f "$TMP_CONFIG"
             fi
         fi
+
     elif [[ "$option" == "run" ]]; then
-        read -p "Do you want to update config.lua? (Y/N): " run
+        read -p "Enter application name to run: " run
         if [[ "$run" == "help" ]]; then
-            echo "Recieved: Help"
-            echo "Type name of application you want run"
+            echo "Received: Help"
+            echo "Type the name of the application you want to run."
             echo "Current Applications:"
-            echo "Server-Mod-V1"
+            echo "  Server-Mod-V1"
         fi
-        break
 
     elif [[ "$option" == "exit" ]]; then
         echo "Exiting installer."
         break
 
     elif [[ "$option" == "extras" ]]; then
-        grep "extrasinstalled = false" config.lua 1>nul  && EXTRAS_INSTALLED=TRUE
-        if EXTRAS_INSTALLED=TRUE then
-    
-            echo "Would you like to install the Extras for this Program? (It is under 500mb)"
+        # Read extrasinstalled value directly from the Lua config (returns "true" or "false")
+        EXTRAS_INSTALLED=$(lua -e '
+            local cfg = dofile("config.lua")
+            if cfg.extrasinstalled == true then
+                print("TRUE")
+            else
+                print("FALSE")
+            end
+        ')
+
+        if [[ "$EXTRAS_INSTALLED" == "FALSE" ]]; then
+            echo "Would you like to install the Extras for this program? (It is under 500mb)"
             read -p "Install Extras? (Y/N): " extrasans
             if [[ "$extrasans" == "Y" ]]; then
                 echo "Installing Extras..."
-                FILE="config.lua"
-                sed -i 's/extrasinstalled = "false"/extrasinstalled = "true"/' "$FILE"
-                echo "extrasinstalled set to: TRUE"
+                # Flip extrasinstalled to true in config.lua
+                sed -i 's/extrasinstalled = false/extrasinstalled = true/' config.lua
+                echo "extrasinstalled set to: true"
                 echo "Preparing to install extras..."
                 echo "Downloading extras pack version 1.0.0"
                 wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1
-                echo "Once installed, please exit the application, restart your machine, and reopen the application, the extras pack will be located in the same folder."
+                echo "Once installed, please exit the application, restart your machine, and reopen the application."
+                echo "The extras pack will be located in the same folder."
             else
                 echo "Extras installation canceled."
             fi
         else
-            echo "Please run the extras .command file in the same folder as this fileis located in."
-        break
+            echo "Extras are already installed. Please run the extras.command file in the same folder as his .command file."
+        fi
 
     else
         echo "Unknown command: $option"
-        echo "Have you typed it correctly? Type help for help."
+        echo "Have you typed it correctly? Type 'help' for a list of commands."
     fi
 done
