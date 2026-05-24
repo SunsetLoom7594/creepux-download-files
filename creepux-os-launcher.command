@@ -2,6 +2,7 @@
 
 CONFIG_URL="https://raw.githubusercontent.com/SunsetLoom7594/creepux-download-files/main/config.lua"
 TMP_CONFIG="config.lua"
+EXTRAS_ISTALLED=nil
 
 
 # ---- Load local config ----
@@ -87,21 +88,25 @@ while true; do
         break
 
     elif [[ "$option" == "extras" ]]; then
-        if 
-        echo "Would you like to install the Extras for this Program? (It is under 500mb)"
-        read -p "Install Extras? (Y/N): " extrasans
-        if [[ "$extrasans" == "Y" ]]; then
-            echo "Installing Extras..."
-            FILE="config.lua"
-            sed -i 's/extrasinstalled = "false"/extrasinstalled = "true"/' "$FILE"
-            echo "extrasinstalled set to: TRUE"
-            echo "Preparing to install extras..."
-            echo "Downloading extras pack version 1.0.0"
-            wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1
-            echo "Once installed, please exit the application, restart your machine, and reopen the application, the extras pack will be located in the same folder."
+        grep "extrasinstalled = false" config.lua 1>nul  && EXTRAS_INSTALLED=TRUE
+        if EXTRAS_INSTALLED=TRUE then
+    
+            echo "Would you like to install the Extras for this Program? (It is under 500mb)"
+            read -p "Install Extras? (Y/N): " extrasans
+            if [[ "$extrasans" == "Y" ]]; then
+                echo "Installing Extras..."
+                FILE="config.lua"
+                sed -i 's/extrasinstalled = "false"/extrasinstalled = "true"/' "$FILE"
+                echo "extrasinstalled set to: TRUE"
+                echo "Preparing to install extras..."
+                echo "Downloading extras pack version 1.0.0"
+                wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1
+                echo "Once installed, please exit the application, restart your machine, and reopen the application, the extras pack will be located in the same folder."
+            else
+                echo "Extras installation canceled."
+            fi
         else
-            echo "Extras installation canceled."
-        fi
+            echo "Please run the extras .command file in the same folder as this fileis located in."
         break
 
     else
