@@ -105,7 +105,7 @@ while true; do
         fi
 
     elif [[ "$option" == "exit" ]]; then
-        echo "Exiting installer."
+        echo "Exiting Creepux OS. See you soon!"
         break
 
     elif [[ "$option" == "extras" ]]; then
