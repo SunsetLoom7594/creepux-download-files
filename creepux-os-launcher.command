@@ -129,7 +129,7 @@ while true; do
                 echo "extrasinstalled set to: true"
                 echo "Preparing to install extras..."
                 echo "Downloading extras pack version 1.0.0"
-                wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1
+                wget --show-progress https://github.com/SunsetLoom7594/creepux-ubuntu-extras-v1.git
                 echo "Once installed, please exit the application, restart your machine, and reopen the application."
                 echo "The extras pack will be located in the same folder."
             else
